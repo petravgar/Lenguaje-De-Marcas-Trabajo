@@ -161,7 +161,30 @@ app.delete('/campeones/:id', (req, res) => {
     }
 });
 
+//ENDPOINTS DE ESTADÍSTICAS
+
+//(Get) - Obtener estadísticas generales
+app.get('/estadisticas/count', (req,res) => {
+        res.status(200).json({ 
+        totalCampeones: campeones.length, // Contamos el numero de campeones utilizando la propiedad length
+        totalSkins: skins.length //Contamos el numero de skins
+    });
+});
+
+//(Get) - Calcular la dificultad media de los campeones
+app.get('/estadisticas/dificultad-media', (req,res) => {
+    if (campeones.length === 0) {
+        return res.status(200).json({ media: 0});//Si no hay campeones, la dificultad media es 0
+    }
+    const sumaDificultad = campeones.reduce((acc, c) => acc + c.dificultad, 0); //Sumamos la dificultad de todos los campeones utilizando reduce
+    const media = sumaDificultad / campeones.length; //Calculamos la media dividiendo la suma total entre el numero de campeones
+
+    res.status(200).json({
+        mensaje: "Cálculo de la dificultad media realizado",
+        dificultadmEDIA: media.toFixed(2) //Limitamos a 2 decimales
+    });
+});
 //Arrancamos el Servidor
 app.listen(PORT, () => {
-    console.log(`Servidor escuchando en el puerto ${PORT}`); 
+    console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
