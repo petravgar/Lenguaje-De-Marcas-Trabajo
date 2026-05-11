@@ -141,6 +141,26 @@ app.post('/campeones', (req, res) => {
     });
 });
 
+//DELETE - Eliminar un campeón por ID
+app.delete('/campeones/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    //Buscamos el índice del campeón en el array
+    const indice = campeones.findIndex(c => c.id === id);
+
+    if (indice !== -1) { //Si el índice es diferente de -1, significa que se encontró el campeón y se puede eliminar
+        const campeonEliminado = campeones.splice(indice, 1);
+        res.status(200).json({
+            mensaje: "Campeón eliminado correctamente",
+            campeon: campeonEliminado[0] //splice devuelve un array con el elemento eliminado, por eso accedemos al primer elemento
+        });
+    }
+    else { 
+        res.status(404).json({  //En caso de que no se encuentre, se devuelve un mensaje de error con el código 404
+            mensaje: "Error: No se ha encontrado el campeón con ese ID"
+        });
+    }
+});
+
 //Arrancamos el Servidor
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto ${PORT}`); 
