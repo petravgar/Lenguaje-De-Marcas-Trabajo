@@ -84,6 +84,8 @@ let skins = [
     }
 ];
 
+//GET - Obtener datos
+
 //Ruta principal
 app.get('/', (req, res) => {
     res.send('Servidor de League of Legends está funcionando'); //Respuesta simple para verificar que el servidor está activo
@@ -110,6 +112,33 @@ app.get('/campeones/:id', (req,res) => {
 //Endpoint para obtener todas las skins
 app.get('/skins', (req, res) => { 
     res.status(200).json(skins);
+});
+
+//POST - Crear nuevo campeón
+app.post('/campeones', (req, res) => {
+    const nuevoCampeon = req.body;
+    
+    //Validación:
+    if (!nuevoCampeon.nombre || !nuevoCampeon.rol) {
+        return res.status(400).json({
+            mensaje: "Bad Request: Los campos 'nombre' y 'rol' son obligatorios"
+
+        });
+    }
+
+    //Generar ID automático (buscando el último y sumando 1)
+    const nuevoId = campeones.length > 0 ? campeones[campeones.length - 1].id + 1 : 1;
+
+    //Creamos el objeto con el id generadl y los datos que hemos recibido
+    const campeonGuardar = { id: nuevoId, ...nuevoCampeon };
+
+    campeones.push(campeonGuardar);
+
+    //Respuesta con éxito: 201 Created
+    res.status(201).json({
+        mensaje: "Campeón creado correctamente",
+        campeon: campeonGuardar
+    });
 });
 
 //Arrancamos el Servidor
