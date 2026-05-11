@@ -12,8 +12,10 @@ La API permite gestionar una colección de **Campeones** (recurso principal) y s
 ## Endpoints (En construcción)
 | Método | Ruta | Descripción | Ejemplo de uso |
 | :--- | :--- | :--- | :--- |
-| GET | `/` | Comprobación del servidor | `http://localhost:3000/` |
-| GET | `/campeones` | Obtener todos los campeones | `http://localhost:3000/campeones` |
+| **GET** | `/` | Comprobación del servidor. | `http://localhost:3000/` |
+| **GET** | `/campeones` | Obtiene la lista completa de campeones. | `http://localhost:3000/campeones` |
+| **GET** | `/campeones/:id` | Obtiene un campeón específico por su ID. | `http://localhost:3000/campeones/1` |
+| **GET** | `/skins` | Obtiene la lista completa de skins. | `http://localhost:3000/skins` |
 
 ---
 **Desarrollado por:** Pedro Enrique Traverso García

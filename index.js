@@ -5,16 +5,6 @@ const PORT = 3000;
 //Entender JSON
 app.use(express.json());
 
-//Ruta principal
-app.get('/', (req, res) => {
-    res.send('Servidor de League of Legends está funcionando');
-});
-
-//Arrancamos el Servidor
-app.listen(PORT, () => {
-    console.log(`Servidor escuchando en el puerto ${PORT}`); 
-});
-
 //Recurso principal: Campeones del LoL
 let campeones = [
     {
@@ -93,3 +83,36 @@ let skins = [
         precio: 20
     }
 ];
+
+//Ruta principal
+app.get('/', (req, res) => {
+    res.send('Servidor de League of Legends está funcionando'); //Respuesta simple para verificar que el servidor está activo
+});
+
+//Endpoint para obtener todos los campeones
+app.get('/campeones', (req, res) => { //Cuando se accede a esta ruta, se devuelve la lista completa de campeones en formato JSON
+    res.status(200).json(campeones); //El código de estado 200 indica que la solicitud es correcta
+});
+
+//Endpoint para obtener un campeón por su id
+app.get('/campeones/:id', (req,res) => {
+    const id = parseInt(req.params.id); //Extraigo el id de los parámetros de la ruta y lo convertimos a un número entero
+    const campeon = campeones.find(c => c.id === id); //Busco el campeón en la lista de campeones utilizando el método find, que devuelve el primer elemento que cumple la condición (en este caso, que el id del campeón sea igual al id proporcionado en la ruta)
+
+    if (campeon) { //Si se encuentra el campeón, se devuelve su información en formato JSON con un código de estado 200, sino, se devuelve un mensaje de error con un código de estado 404 indicando que el campeón no fue encontrado
+        res.status(200).json(campeon);
+    }
+    else {
+        res.status(404).json({ mensaje: "Campeón no encontrado" });
+    }
+});
+
+//Endpoint para obtener todas las skins
+app.get('/skins', (req, res) => { 
+    res.status(200).json(skins);
+});
+
+//Arrancamos el Servidor
+app.listen(PORT, () => {
+    console.log(`Servidor escuchando en el puerto ${PORT}`); 
+});
