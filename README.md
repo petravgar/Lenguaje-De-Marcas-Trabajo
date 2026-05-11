@@ -9,7 +9,7 @@ La API permite gestionar una colección de **Campeones** (recurso principal) y s
 * **Campeones:** Contiene información detallada como rol, dificultad, tipo de daño, línea, región, etc.
 * **Skins:** Colección relacionada con los campeones mediante el campo `campeonId`.
 
-## Endpoints (En construcción)
+## Endpoints
 | Método | Ruta | Descripción | Ejemplo de uso |
 | :--- | :--- | :--- | :--- |
 | **GET** | `/` | Comprobación del servidor. | `http://localhost:3000/` |
@@ -24,6 +24,18 @@ La API permite gestionar una colección de **Campeones** (recurso principal) y s
 | **GET** | `/campeones/:id/skins` | Obtiene todas las skins asociadas a un campeón específico. | `http://localhost:3000/campeones/1/skins` |
 
 ---
+
+## Interfaz Frontend
+Se ha implementado una interfaz visual en la carpeta `/public` que consume la API de forma dinámica mediante JavaScript (Fetch API).
+
+## Herramientas utilizadas
+* **Backend:** Node.js y Express.
+* **Pruebas:** Bruno (Colección exportada incluida en el repositorio).
+* **Frontend:** HTML5, CSS3 y JavaScript.
+
+---
+
+
 **Desarrollado por:** Pedro Enrique Traverso García
 
 **Curso:** 1° DAM
