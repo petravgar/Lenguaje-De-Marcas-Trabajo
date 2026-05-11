@@ -4,6 +4,7 @@ const PORT = 3000;
 
 //Entender JSON
 app.use(express.json());
+app.use(express.static('public')); //Middleware para servir archivos estáticos desde la carpeta "public"
 
 //Recurso principal: Campeones del LoL
 let campeones = [
