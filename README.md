@@ -21,7 +21,9 @@ La API permite gestionar una colección de **Campeones** (recurso principal) y s
 | **GET** | `/estadisticas/count` | Obtiene el total de registros de cada recurso. | `http://localhost:3000/estadisticas/count` |
 | **GET** | `/estadisticas/dificultad-media` | Calcula la media de dificultad de los campeones. | `http://localhost:3000/estadisticas/dificultad-media` |
 | **GET** | `/campeones/search/filter` | Filtra por región, dificultad máxima o melee (Query Params). | `http://localhost:3000/campeones/search/filter?region=Demacia&dificultadMax=2` |
+| **GET** | `/campeones/:id/skins` | Obtiene todas las skins asociadas a un campeón específico. | `http://localhost:3000/campeones/1/skins` |
 
 ---
 **Desarrollado por:** Pedro Enrique Traverso García
+
 **Curso:** 1° DAM

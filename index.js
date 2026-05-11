@@ -207,6 +207,23 @@ app.get('/campeones/search/filter', (req,res) => {
     }
     res.status(200).json(resultados);
 });
+
+//OPERACIONES CON LOS RECURSOS SECUNDARIOS
+//(Get) - Obtener todas las skins de un campeon por su ID
+app.get('/campeones/:id/skins', (req,res) => {
+    const idCampeon = parseInt(req.params.id);
+    //Filtramos el array de skins buscando las que coincidan con campeonId
+    const skinsDelCampeon = skins.filter(s => s.campeonId === idCampeon);
+
+    if (skinsDelCampeon.length > 0) { //Si se encuentran skins para ese campeón, se devuelven en formato JSON con un código de estado 200, sino, se devuelve un mensaje de error con un código de estado 404 indicando que no se encontraron skins para ese campeón
+        res.status(200).json(skinsDelCampeon);
+    }
+    else {
+        res.status(404).json({
+            mensaje: "No se encontraron skins para este campeón o este no existe"
+        });
+    }
+});
 //Arrancamos el Servidor
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto ${PORT}`);
