@@ -184,6 +184,29 @@ app.get('/estadisticas/dificultad-media', (req,res) => {
         dificultadmEDIA: media.toFixed(2) //Limitamos a 2 decimales
     });
 });
+
+//ENDPOINTS DE BUSQUEDA Y FILTROS
+//(Get) - Filtrar campeones
+app.get('/campeones/search/filter', (req,res) => {
+    let resultados = [...campeones]; //Creamos una copia del array de campeones para aplicar los filtros
+    const { region, dificultadMax, esMelee } = req.query; //Extraemos los parámetros de consulta (query) de la URL
+
+    //1. Filtro por región
+    if (region) {
+        resultados = resultados.filter(c => c.region.toLowerCase().includes(region.toLowerCase())); //Convertimos ambos valores a minúsculas 
+    }
+
+    //2. Filtro por dificultad máxima
+    if (dificultadMax) {
+        resultados = resultados.filter(c => c.dificultad <= parseInt(dificultadMax)); //Convertimos el valor de dificultadMax a un número entero para compararlo con la dificultad de cada campeón
+    }
+    //3. Filtro por esMelee
+    if (esMelee !== undefined) { //Verificamos que el parámetro esMelee esté presente en la consulta
+        const valorFiltro = esMelee === 'true'; //Convertimos el string a booleano
+        resultados = resultados.filter(c => c.esMelee === valorFiltro);
+    }
+    res.status(200).json(resultados);
+});
 //Arrancamos el Servidor
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto ${PORT}`);

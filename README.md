@@ -20,6 +20,7 @@ La API permite gestionar una colección de **Campeones** (recurso principal) y s
 | **DELETE** | `/campeones/:id` | Elimina un campeón de la lista según su ID. | `http://localhost:3000/campeones/2` |
 | **GET** | `/estadisticas/count` | Obtiene el total de registros de cada recurso. | `http://localhost:3000/estadisticas/count` |
 | **GET** | `/estadisticas/dificultad-media` | Calcula la media de dificultad de los campeones. | `http://localhost:3000/estadisticas/dificultad-media` |
+| **GET** | `/campeones/search/filter` | Filtra por región, dificultad máxima o melee (Query Params). | `http://localhost:3000/campeones/search/filter?region=Demacia&dificultadMax=2` |
 
 ---
 **Desarrollado por:** Pedro Enrique Traverso García
