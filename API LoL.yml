@@ -1,0 +1,130 @@
+opencollection: 1.0.0
+info:
+  name: API LoL
+config:
+  proxy:
+    inherit: true
+    config:
+      protocol: http
+      hostname: ''
+      port: ''
+      auth:
+        username: ''
+        password: ''
+      bypassProxy: ''
+items:
+  - info:
+      name: Crear Campeon
+      type: http
+      seq: 2
+    http:
+      method: POST
+      url: http://localhost:3000/campeones/5
+      body:
+        type: json
+        data: |-
+          {
+            "nombre": "Ahri",
+            "rol": "Mago",
+            "dificultad": 2,
+            "daño": "Mágico",
+            "linea": "Mid",
+            "esMelee": false,
+            "region": "Jonia"
+          }
+      auth: inherit
+    settings:
+      encodeUrl: true
+      timeout: 0
+      followRedirects: true
+      maxRedirects: 5
+  - info:
+      name: Eliminar un campeon
+      type: http
+      seq: 4
+    http:
+      method: DELETE
+      url: http://localhost:3000/campeones/2
+      auth: inherit
+    settings:
+      encodeUrl: true
+      timeout: 0
+      followRedirects: true
+      maxRedirects: 5
+  - info:
+      name: Untitled
+      type: http
+      seq: 1
+    http:
+      method: GET
+      url: ''
+      auth: inherit
+    settings:
+      encodeUrl: true
+      timeout: 0
+      followRedirects: true
+      maxRedirects: 5
+  - info:
+      name: Contar Registros
+      type: http
+      seq: 4
+    http:
+      method: GET
+      url: http://localhost:3000/estadisticas/count
+      auth: inherit
+    settings:
+      encodeUrl: true
+      timeout: 0
+      followRedirects: true
+      maxRedirects: 5
+  - info:
+      name: Dificultad Media
+      type: http
+      seq: 5
+    http:
+      method: GET
+      url: http://localhost:3000/estadisticas/dificultad-media
+      auth: inherit
+    settings:
+      encodeUrl: true
+      timeout: 0
+      followRedirects: true
+      maxRedirects: 5
+  - info:
+      name: Filtrar Campeon
+      type: http
+      seq: 6
+    http:
+      method: GET
+      url: http://localhost:3000/campeones/search/filter?region=Demacia
+      params:
+        - name: region
+          value: Demacia
+          type: query
+      auth: inherit
+    settings:
+      encodeUrl: true
+      timeout: 0
+      followRedirects: true
+      maxRedirects: 5
+  - info:
+      name: Skins de Campeon
+      type: http
+      seq: 7
+    http:
+      method: GET
+      url: http://localhost:3000/campeones/99/skins
+      auth: inherit
+    settings:
+      encodeUrl: true
+      timeout: 0
+      followRedirects: true
+      maxRedirects: 5
+bundled: true
+extensions:
+  bruno:
+    ignore:
+      - node_modules
+      - .git
+    exportedAt: '2026-05-11T20:31:40.612Z'
+    exportedUsing: Bruno
